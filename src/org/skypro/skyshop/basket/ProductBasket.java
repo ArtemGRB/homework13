@@ -39,7 +39,9 @@ public class ProductBasket {
         if (getSumOfProducts() != 0) {
             System.out.println("Итого: " + getSumOfProducts());
 
-        } else System.out.println("в корзине пусто");
+        } else {
+            System.out.println("в корзине пусто");
+        }
     }
 
     //проверка наличия товара в корзине по названию
