@@ -1,6 +1,7 @@
 package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Product;
+import org.skypro.skyshop.product.SimpleProduct;
 
 import java.sql.SQLOutput;
 
@@ -42,6 +43,7 @@ public class ProductBasket {
         } else {
             System.out.println("в корзине пусто");
         }
+        System.out.println("Специальных товаров: " + getCountSpecialProduct());
     }
 
     //проверка наличия товара в корзине по названию
@@ -60,4 +62,16 @@ public class ProductBasket {
             productBasket[i] = null;
         }
     }
+
+    //подсчет количество специальных товаров
+    public int getCountSpecialProduct() {
+        int count = 0;
+        for (int i = 0; i < productBasket.length; i++) {
+            if (productBasket[i] != null && productBasket[i].isSpecial()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
 }
