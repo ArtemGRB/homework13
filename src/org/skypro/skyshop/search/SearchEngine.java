@@ -25,11 +25,8 @@ public class SearchEngine {
 
 
         for (Searchable searchable : searchables) {
-            if (searchable == null) {
-                continue;
-            }
 
-            if (searchable.getSearchTerm().contains(query)) {
+            if (searchable != null && searchable.getSearchTerm().contains(query)) {
                 results[count] = searchable; // Добавляем в результаты
                 count++;
 
