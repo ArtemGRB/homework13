@@ -4,14 +4,10 @@ import java.io.IOException;
 
 public class BestResultNotFound extends IOException {
 
-    String query;
 
-    public BestResultNotFound(String query) {
-        this.query = query;
+    public BestResultNotFound(String massage) {
+        super("Объекты, в которых встречается \"" + massage +"\" не найдены");
     }
 
-    @Override
-    public String toString() {
-        return "Совпадение с \"" + query + "\"не найдено";
-    }
+
 }

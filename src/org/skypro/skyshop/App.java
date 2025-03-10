@@ -42,15 +42,13 @@ public class App {
             searchEngine.add(new Article("Видеоняня",
                     "Видеоняня с монитором, беспроводная 1280 * 720 HD"));
 
-            Searchable result = searchEngine.search2(query);
+            Searchable result = searchEngine.search2("coo");
 
             System.out.println(result);
 
 
         } catch (IllegalArgumentException e) {
             System.out.println("Введены не корректные данные!");
-        } catch (BestResultNotFound e) {
-            System.out.println("Объекты, в которых встречается \"" + query +"\" не найдены");
         }
 
 

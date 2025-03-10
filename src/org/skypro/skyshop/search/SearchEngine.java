@@ -41,7 +41,7 @@ public class SearchEngine {
         return results;
     }
 
-    public Searchable search2(String substring) throws BestResultNotFound {
+    public Searchable search2(String substring) {
         int count = 0;
         Searchable result = null;
         for (Searchable a : searchables) {
@@ -64,7 +64,11 @@ public class SearchEngine {
         }
 
         if (result == null) {
-            throw new BestResultNotFound(substring);
+            try {
+                throw new BestResultNotFound(substring);
+            } catch (BestResultNotFound e) {
+                System.out.println(e.getMessage());
+            }
         }
         return result;
     }
