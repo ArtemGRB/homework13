@@ -10,25 +10,41 @@ import org.skypro.skyshop.search.SearchEngine;
 import org.skypro.skyshop.search.Searchable;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class App {
     public static void main(String[] args) {
-        String query = "cufdt";
         try {
             ProductBasket basket = new ProductBasket();
 
             //Демонстрация классов
             //Добавление продукта в корзину.
             basket.addToBasket(new SimpleProduct("egg", 100));
-
-            //Заполнение корзины
             basket.addToBasket(new SimpleProduct("milk", 80));
             basket.addToBasket(new DiscountedProduct("cookie", 150, 10));
-            basket.addToBasket(new FixPriceProduct("vegetable cutter"));
-            basket.addToBasket(new SimpleProduct("sugar", 60));
+            basket.addToBasket(new SimpleProduct("milk", 80));
+            basket.addToBasket(new DiscountedProduct("cookie", 150, 10));
 
-            SearchEngine searchEngine = new SearchEngine(10);
+
+            //печать текущей корзины
+            basket.printProductsOfBasket();
+
+            //удаление всех Product объектов где встречается "milk" и печать удаленных объектов
+            System.out.println(basket.removeFromBasketByName("milk"));
+
+            //печать текущей корзины
+            basket.printProductsOfBasket();
+
+            //удаление всех Product объектов с несуществующим в корзине продукта
+            System.out.println(basket.removeFromBasketByName("chicken"));
+
+            //печать текущей корзины
+            basket.printProductsOfBasket();
+
+
+            SearchEngine searchEngine = new SearchEngine();
 
             searchEngine.add(new SimpleProduct("milk", 80));
             searchEngine.add(new DiscountedProduct("cookie", 150, 10));
@@ -42,9 +58,13 @@ public class App {
             searchEngine.add(new Article("Видеоняня",
                     "Видеоняня с монитором, беспроводная 1280 * 720 HD"));
 
-            Searchable result = searchEngine.search2("coo");
+            List<Searchable> result1 = searchEngine.search("u");
 
-            System.out.println(result);
+            System.out.println(result1);
+
+            Searchable result2 = searchEngine.search2("coo");
+
+            System.out.println(result2);
 
 
         } catch (IllegalArgumentException e) {
