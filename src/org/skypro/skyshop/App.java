@@ -13,6 +13,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class App {
     public static void main(String[] args) {
@@ -51,6 +52,7 @@ public class App {
             searchEngine.add(new FixPriceProduct("vegetable cutter"));
             searchEngine.add(new SimpleProduct("sugar", 60));
             searchEngine.add(new SimpleProduct("egg", 100));
+            searchEngine.add(new SimpleProduct("sugar", 60));
 
 
             searchEngine.add(new Article("Ночник",
@@ -58,7 +60,7 @@ public class App {
             searchEngine.add(new Article("Видеоняня",
                     "Видеоняня с монитором, беспроводная 1280 * 720 HD"));
 
-            List<Searchable> result1 = searchEngine.search("u");
+            Map<String, Searchable> result1 = searchEngine.search("u");
 
             System.out.println(result1);
 
@@ -70,7 +72,6 @@ public class App {
         } catch (IllegalArgumentException e) {
             System.out.println("Введены не корректные данные!");
         }
-
 
     }
 }
