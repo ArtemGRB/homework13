@@ -2,14 +2,11 @@ package org.skypro.skyshop.search;
 
 import org.skypro.skyshop.exeption.BestResultNotFound;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class SearchEngine {
 
-    private Map<String, Searchable> searchableMap = new TreeMap<>();
+    private Map<String, Searchable> searchableMap = new TreeMap<>(Comparator.naturalOrder());
     private List<Searchable> searchables = new ArrayList<>();
     private int currentIndex = 0;
 
