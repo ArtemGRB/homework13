@@ -2,18 +2,13 @@ package org.skypro.skyshop;
 
 import org.skypro.skyshop.article.Article;
 import org.skypro.skyshop.basket.ProductBasket;
-import org.skypro.skyshop.exeption.BestResultNotFound;
 import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.search.SearchEngine;
 import org.skypro.skyshop.search.Searchable;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class App {
     public static void main(String[] args) {
@@ -52,7 +47,7 @@ public class App {
             searchEngine.add(new FixPriceProduct("vegetable cutter"));
             searchEngine.add(new SimpleProduct("sugar", 60));
             searchEngine.add(new SimpleProduct("egg", 100));
-            searchEngine.add(new SimpleProduct("sugar", 60));
+
 
 
             searchEngine.add(new Article("Ночник",
@@ -60,7 +55,7 @@ public class App {
             searchEngine.add(new Article("Видеоняня",
                     "Видеоняня с монитором, беспроводная 1280 * 720 HD"));
 
-            Map<String, Searchable> result1 = searchEngine.search("u");
+            Set<Searchable> result1 = searchEngine.search("u");
 
             System.out.println(result1);
 

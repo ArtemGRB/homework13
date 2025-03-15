@@ -6,8 +6,7 @@ import java.util.*;
 
 public class SearchEngine {
 
-    private Map<String, Searchable> searchableMap = new TreeMap<>();
-    private List<Searchable> searchables = new ArrayList<>();
+    private Set<Searchable> searchables = new HashSet<>();
 
 
     public void add(Searchable searchable) {
@@ -15,16 +14,28 @@ public class SearchEngine {
     }
 
     // поиск в Searchable объектах по строке
-    public Map<String, Searchable> search(String query) {
+    public Set<Searchable> search(String query) {
+
+        Set<Searchable> searchableSet = new TreeSet<>(new Comparator<Searchable>() {
+            @Override
+            public int compare(Searchable o1, Searchable o2) {
+
+                if (o1.getName().length() - o2.getName().length() == 0) {
+                    return  o1.getName().compareTo(o2.getName());
+                }
+
+                return o1.getName().length() - o2.getName().length();
+            }
+        });
 
         for (Searchable searchable : searchables) {
 
             if (searchable.getSearchTerm().contains(query)) {
 
-                searchableMap.put(searchable.getName(),searchable); // Добавляем в результаты
+                searchableSet.add(searchable); // Добавляем в результаты
             }
         }
-        return searchableMap;
+        return searchableSet;
     }
 
 
