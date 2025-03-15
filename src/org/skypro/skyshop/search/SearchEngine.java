@@ -6,9 +6,8 @@ import java.util.*;
 
 public class SearchEngine {
 
-    private Map<String, Searchable> searchableMap = new TreeMap<>(Comparator.naturalOrder());
+    private Map<String, Searchable> searchableMap = new TreeMap<>();
     private List<Searchable> searchables = new ArrayList<>();
-    private int currentIndex = 0;
 
 
     public void add(Searchable searchable) {
@@ -17,8 +16,6 @@ public class SearchEngine {
 
     // поиск в Searchable объектах по строке
     public Map<String, Searchable> search(String query) {
-
-        List<Searchable> results = new ArrayList<>();
 
         for (Searchable searchable : searchables) {
 
