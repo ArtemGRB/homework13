@@ -3,6 +3,7 @@ package org.skypro.skyshop.search;
 import org.skypro.skyshop.exeption.BestResultNotFound;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SearchEngine {
 
@@ -16,27 +17,23 @@ public class SearchEngine {
     // поиск в Searchable объектах по строке
     public Set<Searchable> search(String query) {
 
-        Set<Searchable> searchableSet = new TreeSet<>(new Comparator<Searchable>() {
-            @Override
-            public int compare(Searchable o1, Searchable o2) {
+        Set<Searchable> result = searchables.stream()
+                .filter(s -> s.getSearchTerm().contains(query))
+                .collect(Collectors.toCollection(() -> new TreeSet<>(new Comparator<Searchable>() {
+                            @Override
+                            public int compare(Searchable o1, Searchable o2) {
 
-                if (o1.getName().length() - o2.getName().length() == 0) {
-                    return  o1.getName().compareTo(o2.getName());
-                }
+                                if (o1.getName().length() - o2.getName().length() == 0) {
+                                    return o1.getName().compareTo(o2.getName());
+                                }
 
-                return o1.getName().length() - o2.getName().length();
-            }
-        });
+                                return o1.getName().length() - o2.getName().length();
+                            }
+                        })));
 
-        for (Searchable searchable : searchables) {
-
-            if (searchable.getSearchTerm().contains(query)) {
-
-                searchableSet.add(searchable); // Добавляем в результаты
-            }
-        }
-        return searchableSet;
+        return result;
     }
+
 
 
     // поиск Searchable объекта в котором больше всего встречается поисковая строка

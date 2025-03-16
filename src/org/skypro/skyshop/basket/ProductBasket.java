@@ -1,10 +1,8 @@
 package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Product;
-import org.skypro.skyshop.product.SimpleProduct;
-
-import java.sql.SQLOutput;
 import java.util.*;
+
 
 public class ProductBasket {
 
@@ -15,25 +13,18 @@ public class ProductBasket {
         productBasketMap.computeIfAbsent(product.getName(), k -> new ArrayList<Product>()).add(product);
     }
 
-
     //Метод получения общей стоимости корзины: метод ничего не принимает и возвращает целое число.
     public int getSumOfProducts() {
-        int sum = 0;
-        for (List<Product> productList : productBasketMap.values()) {
-            for (Product product : productList) {
-                sum += product.getPrice();
-            }
-        }
-        return sum;
+
+        return productBasketMap.values().stream().flatMap(Collection::stream).
+                mapToInt(p -> p.getPrice()).sum();
     }
 
     //Метод печатает содержимое корзины
     public void printProductsOfBasket() {
-        for (List<Product> productList : productBasketMap.values()) {
-            for (Product product : productList) {
-                System.out.println(product);
-            }
-        }
+
+        productBasketMap.values().stream().flatMap(Collection::stream).forEach(System.out::println);
+
         if (getSumOfProducts() != 0) {
             System.out.println("Итого: " + getSumOfProducts());
 
@@ -50,22 +41,15 @@ public class ProductBasket {
 
     //Очистка корзины
     public void cleanBasket() {
-        for (String k : productBasketMap.keySet()) {
-            productBasketMap.remove(k);
-        }
+        productBasketMap.clear();
     }
 
     //подсчет количество специальных товаров
     public int getCountSpecialProduct() {
-        int count = 0;
-        for (List<Product> productList : productBasketMap.values()) {
-            for (Product product : productList) {
-                if (product.isSpecial()) {
-                    count++;
-                }
-            }
-        }
-        return count;
+
+        return (int) productBasketMap.values().stream().flatMap(Collection::stream)
+                .filter(p -> p.isSpecial())
+                .count();
     }
 
     //удаления продукта по имени из корзины
